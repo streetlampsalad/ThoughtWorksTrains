@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorksTrains.API", "ThoughtWorksTrains.API\ThoughtWorksTrains.API.csproj", "{DCC4FCD9-439A-45A2-9B24-67987767FEB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorksTrains.Models", "..\ThoughtWorksTrains.Models\ThoughtWorksTrains.Models.csproj", "{C1F9FE2C-CB66-4834-866E-5921E7F878FC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorksTrains.Services", "ThoughtWorksTrains.Services\ThoughtWorksTrains.Services.csproj", "{0A702BE3-9037-48E0-ADD8-41354C1DC8C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorksTrains.Tests", "ThoughtWorksTrains.Tests\ThoughtWorksTrains.Tests.csproj", "{27CC2F22-7403-4D6E-A397-9A94086207FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThoughtWorksTrains.Models", "ThoughtWorksTrains.Models\ThoughtWorksTrains.Models.csproj", "{730AE6D2-B0C9-414D-A10B-1A5963F274E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		{DCC4FCD9-439A-45A2-9B24-67987767FEB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCC4FCD9-439A-45A2-9B24-67987767FEB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCC4FCD9-439A-45A2-9B24-67987767FEB1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C1F9FE2C-CB66-4834-866E-5921E7F878FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1F9FE2C-CB66-4834-866E-5921E7F878FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1F9FE2C-CB66-4834-866E-5921E7F878FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1F9FE2C-CB66-4834-866E-5921E7F878FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A702BE3-9037-48E0-ADD8-41354C1DC8C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A702BE3-9037-48E0-ADD8-41354C1DC8C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A702BE3-9037-48E0-ADD8-41354C1DC8C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +29,10 @@ Global
 		{27CC2F22-7403-4D6E-A397-9A94086207FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27CC2F22-7403-4D6E-A397-9A94086207FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27CC2F22-7403-4D6E-A397-9A94086207FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{730AE6D2-B0C9-414D-A10B-1A5963F274E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{730AE6D2-B0C9-414D-A10B-1A5963F274E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{730AE6D2-B0C9-414D-A10B-1A5963F274E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{730AE6D2-B0C9-414D-A10B-1A5963F274E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

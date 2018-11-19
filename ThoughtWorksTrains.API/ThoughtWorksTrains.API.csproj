@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ThoughtWorksTrains.Models\ThoughtWorksTrains.Models.csproj" />
+    <ProjectReference Include="..\ThoughtWorksTrains.Models\ThoughtWorksTrains.Models.csproj" />
     <ProjectReference Include="..\ThoughtWorksTrains.Services\ThoughtWorksTrains.Services.csproj" />
   </ItemGroup>
 

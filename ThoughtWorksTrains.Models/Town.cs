@@ -6,7 +6,7 @@ namespace ThoughtWorksTrains.Models
 {
     public class Town
     {
-        public string Id { get; set; }
-        public List<Route> Routes { get; set; }
+        public string Id { get; set; }        
+        public Dictionary<string, double> RouteMap { get; set; }
     }
 }

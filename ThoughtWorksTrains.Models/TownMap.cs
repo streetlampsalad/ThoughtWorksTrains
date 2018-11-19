@@ -4,9 +4,8 @@ using System.Text;
 
 namespace ThoughtWorksTrains.Models
 {
-    public class Route
+    public class TownMap
     {
-        public string Id { get; set; }
-        public double Distance { get; set; }
+        public Dictionary<string, Town> Towns { get; set; }        
     }
 }

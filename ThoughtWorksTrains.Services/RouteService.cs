@@ -8,7 +8,7 @@ namespace ThoughtWorksTrains.Services
 {
     public class RouteService : IRouteService
     {
-        public double GetRouteDistance(string route, List<Town> towns)
+        public double GetRouteDistance(string route, TownMap townMap)
         {
             var stops = route.Split('-');
             if(!stops.Any())
@@ -27,18 +27,56 @@ namespace ThoughtWorksTrains.Services
 
                 try
                 {
-                    var town = towns.FirstOrDefault(x => x.Id == stop);
-                    var townRoute = town.Routes.FirstOrDefault(y => y.Id == stops[count + 1]);
-                    distance += townRoute.Distance;
+                    var town = townMap.Towns[stop];
+                    distance += town.RouteMap[stops[count + 1]];                    
                     count++;
                 }           
                 catch(Exception ex)
-                {                
+                {
+                    //Log ex
                     throw new ArgumentException("NO SUCH ROUTE");
                 }
             }
 
             throw new ArgumentException("NO SUCH ROUTE");
         }
+        
+        public int GetNumberOfRoutesBetweenTownsMaxStops(string startTownId, string endTownId, TownMap townMap, int maxStops)
+        {
+            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(endTownId) || !townMap.Towns.Any() || maxStops <= 0)
+            {
+                throw new ArgumentException("NO SUCH ROUTE");
+            }
+
+            var routeCount = 0;
+            var currentTowns = new List<Town>();
+            try {
+                currentTowns.Add(townMap.Towns[startTownId]);
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException("NO SUCH ROUTE");
+            }
+
+            for(int i = 0; i <= maxStops; i++)
+            {
+                var connectingTowns = new List<Town>();
+                foreach(var town in currentTowns)
+                {
+                    if(town.Id == endTownId && i != 0)
+                    {
+                        routeCount++;
+                    }
+
+                    foreach(var route in town.RouteMap)
+                    {
+                        connectingTowns.Add(townMap.Towns[route.Key]);
+                    }
+                }
+                currentTowns = connectingTowns;
+            }
+
+            return routeCount;
+        }             
     }
 }

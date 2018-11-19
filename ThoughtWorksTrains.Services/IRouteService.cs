@@ -7,6 +7,6 @@ namespace ThoughtWorksTrains.Services
 {
     public interface IRouteService
     {
-        string GetRouteDistance(string route, List<Town> towns);
+        double GetRouteDistance(string route, List<Town> towns);
     }
 }

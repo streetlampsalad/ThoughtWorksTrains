@@ -49,9 +49,9 @@ namespace ThoughtWorksTrains.Services
             throw new ArgumentException("NO SUCH ROUTE");
         }
         
-        public int GetNumberOfRoutesBetweenTownsByStop(string startTownId, string endTownId, TownMap townMap, int stopCount, LimitType limitType)
+        public int GetNumberOfRoutesBetweenTownsByStop(string startTownId, string destinationTownId, TownMap townMap, int stopCount, LimitType limitType)
         {            
-            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(endTownId) || townMap.Towns == null || stopCount <= 0)
+            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null || stopCount <= 0)
             {
                 throw new ArgumentException("NO SUCH ROUTE");
             }
@@ -73,8 +73,9 @@ namespace ThoughtWorksTrains.Services
                 var connectingTowns = new List<Town>();
                 foreach(var town in currentTowns)
                 {
-                    if(town.Id == endTownId && i != 0)
+                    if(town.Id == destinationTownId && i != 0)
                     {
+                        // depending on the limit typed passed count if current town in the destination town
                         if(limitType == LimitType.MaxOrEqual)
                         {
                             routeCount++;
@@ -100,17 +101,20 @@ namespace ThoughtWorksTrains.Services
             return routeCount;
         }
 
-        public int GetNumberOfRoutesBetweenTownsByDistance(string startTownId, string endTownId, TownMap townMap, double distance, LimitType limitType)
+        public int GetNumberOfRoutesBetweenTownsByDistance(string startTownId, string destinationTownId, TownMap townMap, double distance, LimitType limitType)
         {
-            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(endTownId) || townMap.Towns == null || distance <= 0)
+            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null || distance <= 0)
             {
                 throw new ArgumentException("NO SUCH ROUTE");
             }
             
-            var routeCount = 0;            
+            var routeCount = 0;
+            
+            // create 2 lists, 1 to loop over and 1 to edit while in the loop
             var currentRoutes = new List<string> { startTownId };
             var potentialRoutes = new List<string> { startTownId };
 
+            // might need a max loop count
             while (true)
             {                                
                 foreach (var route in currentRoutes)
@@ -128,13 +132,15 @@ namespace ThoughtWorksTrains.Services
 
                     foreach(var potentialTown in town.RouteMap)
                     {
-                        var potentialRoute = string.Join('-', route, potentialTown.Key);
+                        var potentialRoute = string.Join('-', route, potentialTown.Key);                        
                         var potentialRouteDistance = GetRouteDistance(potentialRoute, townMap);
+
+                        // if the potential route is within the distance limit and hasn't already been added, add it to the list of valid routes and count if it end at the destination town
                         if(potentialRouteDistance <= distance && !currentRoutes.Contains(potentialRoute))
                         {
                             potentialRoutes.Add(potentialRoute);
 
-                            if(potentialTown.Key == endTownId)
+                            if(potentialTown.Key == destinationTownId)
                             {
                                 if(limitType == LimitType.MaxOrEqual)
                                 {
@@ -158,9 +164,89 @@ namespace ThoughtWorksTrains.Services
                     return routeCount;
                 }
 
+                // clear the current routes list and copy over the potential routes list that was modified during the last loop with the new routes and start the loop again with the new routes 
                 currentRoutes = new List<string>();
                 currentRoutes.AddRange(potentialRoutes);
             }            
+        }
+
+        public double GetShortestDistanceBetweenTownsById(string startTownId, string destinationTownId, TownMap townMap)
+        {
+            if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null)
+            {
+                throw new ArgumentException("NO SUCH ROUTE");
+            }            
+            
+            if(!townMap.Towns.ContainsKey(destinationTownId))
+            {
+                throw new ArgumentException("NO SUCH ROUTE");
+            }
+
+            var currentRoutes = new Dictionary<string, double> { { startTownId, 0 } };
+            var potentialRoutes = new Dictionary<string, double> { { startTownId, 0 } };
+            var destinationRoutes = new Dictionary<string, double>();
+
+            // might need a max loop count
+            while(true)
+            {
+                foreach(var route in currentRoutes)
+                {
+                    var town = new Town();
+                    try
+                    {
+                        town = townMap.Towns[route.Key.Split('-').Last()];
+                    }
+                    catch(Exception ex)
+                    {
+                        // Log ex
+                        throw new ArgumentException("NO SUCH ROUTE");
+                    }
+
+                    if(town.Id != destinationTownId)
+                    {
+                        foreach(var potentialTown in town.RouteMap)
+                        {
+                            var potentialRoute = string.Join('-', route.Key, potentialTown.Key);
+                            var potentialRouteDistance = GetRouteDistance(potentialRoute, townMap);
+
+                            if(!currentRoutes.Keys.Contains(potentialRoute))
+                            {                                                  
+                                if(destinationRoutes.Any())
+                                {
+                                    if(potentialRouteDistance < destinationRoutes.Values.Min())
+                                    {
+                                        potentialRoutes.Add(potentialRoute, potentialRouteDistance);
+                                    }
+                                }
+                                else
+                                {
+                                    potentialRoutes.Add(potentialRoute, potentialRouteDistance);
+                                }
+                            }
+
+                            if(potentialTown.Key == destinationTownId && !destinationRoutes.Keys.Contains(potentialRoute))
+                            {
+                                destinationRoutes.Add(potentialRoute, potentialRouteDistance);
+                            }
+                        }
+                    }                    
+                }
+
+                if(potentialRoutes.Count() == currentRoutes.Count())
+                {                    
+                    if(destinationRoutes.Any())
+                    {
+                        return destinationRoutes.Values.Min();
+                    }
+                    throw new ArgumentException("NO SUCH ROUTE");
+                }
+                
+                currentRoutes = new Dictionary<string, double>();
+                foreach(var potentialRoute in potentialRoutes)
+                {
+                    currentRoutes.Add(potentialRoute.Key, potentialRoute.Value);
+                }                
+            }
         }
     }
 }

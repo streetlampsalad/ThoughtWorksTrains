@@ -204,7 +204,61 @@ namespace ThoughtWorksTrains.Tests
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("C", "C", _testTowns, 30D, LimitType.LessThen);
             Assert.IsNotNull(result);
             Assert.AreEqual(7, result);
-        }        
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteAtoCExact10()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "C", _testTowns, 10D, LimitType.Exact);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteCtoC30()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("C", "C", _testTowns, 30D, LimitType.MaxOrEqual);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(9, result);
+        }
+
+        #endregion
+
+        #region GetShortestDistanceBetweenTownsById
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_InvalidStartTownId()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("ZZ", "B", _testTowns), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_InvalidEndTownId()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "ZZ", _testTowns), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_CalculateShortestRouteBetweenAandB()
+        {
+            var result = _routeService.GetShortestDistanceBetweenTownsById("A", "B", _testTowns);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(5, result);
+        }
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_EmptyTown()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "B", new TownMap()), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_CalculateShortestRouteBetweenAandC()
+        {
+            var result = _routeService.GetShortestDistanceBetweenTownsById("A", "C", _testTowns);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(9, result);
+        }
 
         #endregion
     }

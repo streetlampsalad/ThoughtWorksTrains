@@ -11,5 +11,6 @@ namespace ThoughtWorksTrains.Services
         double GetRouteDistance(string route, TownMap townMap);
         int GetNumberOfRoutesBetweenTownsByStop(string startTownId, string endTownId, TownMap townMap, int stopCount, LimitType limitType);
         int GetNumberOfRoutesBetweenTownsByDistance(string startTownId, string endTownId, TownMap townMap, double distance, LimitType limitType);
+        double GetShortestDistanceBetweenTownsById(string startTownId, string destinationTownId, TownMap townMap);
     }
 }

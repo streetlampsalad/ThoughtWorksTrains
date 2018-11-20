@@ -57,25 +57,25 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetRouteDistance_EmptyTown()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-B", new TownMap()), "NO SUCH ROUTE");            
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-B", new TownMap()), "No such route");            
         }
 
         [Test]
         public void GetRouteDistance_EmptyRoute()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("", _testTowns), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("", _testTowns), "No such route");
         }
 
         [Test]
         public void GetRouteDistance_RouteDoesNotExist()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-E-D", _testTowns), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-E-D", _testTowns), "No such route");
         }
 
         [Test]
         public void GetRouteDistance_InvalidInput()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-38A-A8AAS9D8H", _testTowns), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-38A-A8AAS9D8H", _testTowns), "No such route");
         }
 
         [Test]
@@ -117,7 +117,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetNumberOfRoutesBetweenTownsByStop_InvalidStartTownId()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("ZZ", "C", _testTowns, 7, LimitType.MaxOrEqual), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("ZZ", "C", _testTowns, 7, LimitType.MaxOrEqual), "No such route");
         }
 
         [Test]
@@ -139,7 +139,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetNumberOfRoutesBetweenTownsByStop_EmptyTown()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "B", new TownMap(), 5, LimitType.MaxOrEqual), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "B", new TownMap(), 5, LimitType.MaxOrEqual), "No such route");
         }
 
         [Test]
@@ -173,7 +173,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetNumberOfRoutesBetweenTownsByDistance_InvalidStartTownId()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("ZZ", "C", _testTowns, 30D, LimitType.LessThen), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("ZZ", "C", _testTowns, 30D, LimitType.LessThen), "No such route");
         }
 
         [Test]
@@ -195,7 +195,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetNumberOfRoutesBetweenTownsByDistance_EmptyTown()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "B", new TownMap(), 6D, LimitType.LessThen), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "B", new TownMap(), 6D, LimitType.LessThen), "No such route");
         }
 
         [Test]
@@ -229,13 +229,13 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetShortestDistanceBetweenTownsById_InvalidStartTownId()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("ZZ", "B", _testTowns), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("ZZ", "B", _testTowns), "No such route");
         }
 
         [Test]
         public void GetShortestDistanceBetweenTownsById_InvalidEndTownId()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "ZZ", _testTowns), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "ZZ", _testTowns), "No such route");
         }
 
         [Test]
@@ -249,7 +249,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetShortestDistanceBetweenTownsById_EmptyTown()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "B", new TownMap()), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetShortestDistanceBetweenTownsById("A", "B", new TownMap()), "No such route");
         }
 
         [Test]

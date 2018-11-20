@@ -29,7 +29,8 @@ namespace ThoughtWorksTrains.API
             services.AddCors();
             services.AddMvc();
 
-            services.AddScoped<IRouteService, RouteService>();            
+            services.AddScoped<IRouteService, RouteService>();
+            services.AddScoped<ITownService, TownService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

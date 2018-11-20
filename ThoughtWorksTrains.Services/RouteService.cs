@@ -13,13 +13,13 @@ namespace ThoughtWorksTrains.Services
         {
             if(string.IsNullOrWhiteSpace(route) || townMap.Towns == null)
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
 
             var stops = route.Split('-');
             if(!stops.Any())
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
 
             var distance = 0D;
@@ -42,18 +42,18 @@ namespace ThoughtWorksTrains.Services
                 catch(Exception ex)
                 {
                     //Log ex
-                    throw new ArgumentException("NO SUCH ROUTE");
+                    throw new ArgumentException("No such route");
                 }
             }
 
-            throw new ArgumentException("NO SUCH ROUTE");
+            throw new ArgumentException("No such route");
         }
         
         public int GetNumberOfRoutesBetweenTownsByStop(string startTownId, string destinationTownId, TownMap townMap, int stopCount, LimitType limitType)
         {            
             if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null || stopCount <= 0)
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
 
             var routeCount = 0;            
@@ -65,7 +65,7 @@ namespace ThoughtWorksTrains.Services
             catch(Exception ex)
             {
                 // Log ex
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
 
             for(int i = 0; i <= stopCount; i++)
@@ -105,7 +105,7 @@ namespace ThoughtWorksTrains.Services
         {
             if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null || distance <= 0)
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
             
             var routeCount = 0;
@@ -127,7 +127,7 @@ namespace ThoughtWorksTrains.Services
                     catch(Exception ex)
                     {
                         // Log ex
-                        throw new ArgumentException("NO SUCH ROUTE");
+                        throw new ArgumentException("No such route");
                     }
 
                     foreach(var potentialTown in town.RouteMap)
@@ -174,12 +174,12 @@ namespace ThoughtWorksTrains.Services
         {
             if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null)
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }            
             
             if(!townMap.Towns.ContainsKey(destinationTownId))
             {
-                throw new ArgumentException("NO SUCH ROUTE");
+                throw new ArgumentException("No such route");
             }
 
             var currentRoutes = new Dictionary<string, double> { { startTownId, 0 } };
@@ -199,7 +199,7 @@ namespace ThoughtWorksTrains.Services
                     catch(Exception ex)
                     {
                         // Log ex
-                        throw new ArgumentException("NO SUCH ROUTE");
+                        throw new ArgumentException("No such route");
                     }
 
                     if(town.Id != destinationTownId)
@@ -238,7 +238,7 @@ namespace ThoughtWorksTrains.Services
                     {
                         return destinationRoutes.Values.Min();
                     }
-                    throw new ArgumentException("NO SUCH ROUTE");
+                    throw new ArgumentException("No such route");
                 }
                 
                 currentRoutes = new Dictionary<string, double>();

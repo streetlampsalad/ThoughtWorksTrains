@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using ThoughtWorksTrains.Models;
 using ThoughtWorksTrains.Services;
+using ThoughtWorksTrains.Constants;
 
 namespace ThoughtWorksTrains.Tests
 {
     [TestFixture]
     class RouteServiceTests
     {
+
+        #region Setup    
 
         private IRouteService _routeService;
 
@@ -31,18 +34,16 @@ namespace ThoughtWorksTrains.Tests
             }
         };
 
-        #region GetRouteDistance
+        #endregion
+
+        #region GetRouteDistance        
 
         [Test]
-        public void GetRouteDistance_RouteDoesNotExist()
+        public void GetRouteDistance_CalculateRouteA()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-E-D", _testTowns), "NO SUCH ROUTE");            
-        }
-
-        [Test]
-        public void GetRouteDistance_InvalidInput()
-        {
-            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-38A-A8AAS9D8H", _testTowns), "NO SUCH ROUTE");
+            var result = _routeService.GetRouteDistance("A", _testTowns);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result);
         }
 
         [Test]
@@ -51,6 +52,30 @@ namespace ThoughtWorksTrains.Tests
             var result = _routeService.GetRouteDistance("A-B", _testTowns);
             Assert.IsNotNull(result);
             Assert.AreEqual(5, result);
+        }
+
+        [Test]
+        public void GetRouteDistance_EmptyTown()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-B", new TownMap()), "NO SUCH ROUTE");            
+        }
+
+        [Test]
+        public void GetRouteDistance_EmptyRoute()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("", _testTowns), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetRouteDistance_RouteDoesNotExist()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-E-D", _testTowns), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetRouteDistance_InvalidInput()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A-38A-A8AAS9D8H", _testTowns), "NO SUCH ROUTE");
         }
 
         [Test]
@@ -87,21 +112,99 @@ namespace ThoughtWorksTrains.Tests
 
         #endregion
 
-        #region GetNumberOfRoutesBetweenTownsMaxStops
+        #region GetNumberOfRoutesBetweenTownsByStop
 
         [Test]
-        public void GetNumberOfRoutesBetweenTownsMaxStops_InvalidInput()
+        public void GetNumberOfRoutesBetweenTownsByStop_InvalidStartTownId()
         {
-            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsMaxStops("F", "34", _testTowns, 7), "NO SUCH ROUTE");
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("ZZ", "C", _testTowns, 7, LimitType.MaxOrEqual), "NO SUCH ROUTE");
         }
 
         [Test]
-        public void GetNumberOfRoutesBetweenTownsMaxStops_CalculateRouteCtoCMax3()
+        public void GetNumberOfRoutesBetweenTownsByStop_InvalidEndTownId()
         {
-            var result = _routeService.GetNumberOfRoutesBetweenTownsMaxStops("C", "C", _testTowns, 3);
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("C", "ZZ", _testTowns, 10, LimitType.MaxOrEqual);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoBMax5()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "B", _testTowns, 5, LimitType.MaxOrEqual);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(8, result);
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByStop_EmptyTown()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "B", new TownMap(), 5, LimitType.MaxOrEqual), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteCtoCMax3()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("C", "C", _testTowns, 3, LimitType.MaxOrEqual);
             Assert.IsNotNull(result);
             Assert.AreEqual(2, result);
+        }        
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoCExact4()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "C", _testTowns, 4, LimitType.Exact);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(3, result);
         }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoEExact7()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "E", _testTowns, 7, LimitType.Exact);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(9, result);
+        }
+
+        #endregion
+
+        #region GetNumberOfRoutesBetweenTownsByDistance
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_InvalidStartTownId()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("ZZ", "C", _testTowns, 30D, LimitType.LessThen), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_InvalidEndTownId()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "ZZ", _testTowns, 6D, LimitType.LessThen);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(0, result);
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteAtoBLessThen6()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "B", _testTowns, 6D, LimitType.LessThen);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(1, result);
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_EmptyTown()
+        {
+            Assert.Throws<ArgumentException>(() => _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "B", new TownMap(), 6D, LimitType.LessThen), "NO SUCH ROUTE");
+        }
+
+        [Test]
+        public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteCtoCLessThen30()
+        {
+            var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("C", "C", _testTowns, 30D, LimitType.LessThen);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(7, result);
+        }        
 
         #endregion
     }

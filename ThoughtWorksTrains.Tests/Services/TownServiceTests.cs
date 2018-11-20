@@ -37,8 +37,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GenerateTownMapByRoutes_Success()
         {
-            var result = _townService.GenerateTownMapByRoutes(_testRoutes);
-            Assert.IsNotNull(result);
+            var result = _townService.GenerateTownMapByRoutes(_testRoutes);            
             Assert.AreEqual(result.Towns.Count, 5);
             Assert.IsTrue(result.Towns.ContainsKey("A"));
             Assert.AreEqual(result.Towns["A"].RouteMap.Count, 3);

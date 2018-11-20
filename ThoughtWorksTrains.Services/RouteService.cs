@@ -238,7 +238,8 @@ namespace ThoughtWorksTrains.Services
                     {
                         return destinationRoutes.Values.Min();
                     }
-                    throw new ArgumentException("No such route");
+
+                    return 0;
                 }
                 
                 currentRoutes = new Dictionary<string, double>();

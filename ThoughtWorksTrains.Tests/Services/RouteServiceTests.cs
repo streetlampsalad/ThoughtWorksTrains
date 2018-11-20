@@ -41,8 +41,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetRouteDistance_CalculateRouteA()
         {
-            var result = _routeService.GetRouteDistance("A", _testTowns);
-            Assert.IsNotNull(result);
+            var result = _routeService.GetRouteDistance("A", _testTowns);            
             Assert.AreEqual(0, result);
         }
 
@@ -50,7 +49,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetRouteDistance_CalculateRouteAB()
         {
             var result = _routeService.GetRouteDistance("A-B", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(5, result);
         }
 
@@ -82,7 +80,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetRouteDistance_CalculateRouteABC()
         {
             var result = _routeService.GetRouteDistance("A-B-C", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(9, result);
         }
 
@@ -90,7 +87,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetRouteDistance_CalculateRouteAD()
         {
             var result = _routeService.GetRouteDistance("A-D", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(5, result);
         }
 
@@ -98,7 +94,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetRouteDistance_CalculateRouteADC()
         {
             var result = _routeService.GetRouteDistance("A-D-C", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(13, result);
         }
 
@@ -106,7 +101,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetRouteDistance_CalculateRouteAEBCD()
         {
             var result = _routeService.GetRouteDistance("A-E-B-C-D", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(22, result);
         }
 
@@ -124,7 +118,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByStop_InvalidEndTownId()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("C", "ZZ", _testTowns, 10, LimitType.MaxOrEqual);
-            Assert.IsNotNull(result);
             Assert.AreEqual(0, result);
         }
 
@@ -132,7 +125,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoBMax5()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "B", _testTowns, 5, LimitType.MaxOrEqual);
-            Assert.IsNotNull(result);
             Assert.AreEqual(8, result);
         }
 
@@ -146,7 +138,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteCtoCMax3()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("C", "C", _testTowns, 3, LimitType.MaxOrEqual);
-            Assert.IsNotNull(result);
             Assert.AreEqual(2, result);
         }        
 
@@ -154,7 +145,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoCExact4()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "C", _testTowns, 4, LimitType.Exact);
-            Assert.IsNotNull(result);
             Assert.AreEqual(3, result);
         }
 
@@ -162,7 +152,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByStop_CalculateRouteAtoEExact7()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByStop("A", "E", _testTowns, 7, LimitType.Exact);
-            Assert.IsNotNull(result);
             Assert.AreEqual(9, result);
         }
 
@@ -180,7 +169,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByDistance_InvalidEndTownId()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "ZZ", _testTowns, 6D, LimitType.LessThen);
-            Assert.IsNotNull(result);
             Assert.AreEqual(0, result);
         }
 
@@ -188,7 +176,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteAtoBLessThen6()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "B", _testTowns, 6D, LimitType.LessThen);
-            Assert.IsNotNull(result);
             Assert.AreEqual(1, result);
         }
 
@@ -202,7 +189,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteCtoCLessThen30()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("C", "C", _testTowns, 30D, LimitType.LessThen);
-            Assert.IsNotNull(result);
             Assert.AreEqual(7, result);
         }
 
@@ -210,7 +196,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteAtoCExact10()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("A", "C", _testTowns, 10D, LimitType.Exact);
-            Assert.IsNotNull(result);
             Assert.AreEqual(0, result);
         }
 
@@ -218,7 +203,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetNumberOfRoutesBetweenTownsByDistance_CalculateRouteCtoC30()
         {
             var result = _routeService.GetNumberOfRoutesBetweenTownsByDistance("C", "C", _testTowns, 30D, LimitType.MaxOrEqual);
-            Assert.IsNotNull(result);
             Assert.AreEqual(9, result);
         }
 
@@ -242,7 +226,6 @@ namespace ThoughtWorksTrains.Tests
         public void GetShortestDistanceBetweenTownsById_CalculateShortestRouteBetweenAandB()
         {
             var result = _routeService.GetShortestDistanceBetweenTownsById("A", "B", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(5, result);
         }
 
@@ -256,8 +239,14 @@ namespace ThoughtWorksTrains.Tests
         public void GetShortestDistanceBetweenTownsById_CalculateShortestRouteBetweenAandC()
         {
             var result = _routeService.GetShortestDistanceBetweenTownsById("A", "C", _testTowns);
-            Assert.IsNotNull(result);
             Assert.AreEqual(9, result);
+        }
+
+        [Test]
+        public void GetShortestDistanceBetweenTownsById_CalculateShortestRouteBetweenCandC()
+        {
+            var result = _routeService.GetShortestDistanceBetweenTownsById("C", "C", _testTowns);
+            Assert.AreEqual(0, result);
         }
 
         #endregion

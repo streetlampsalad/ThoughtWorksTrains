@@ -11,6 +11,11 @@ namespace ThoughtWorksTrains.Services
     {        
         public double GetRouteDistance(string route, TownMap townMap)
         {
+            if(townMap.Towns == null)
+            {
+                throw new ArgumentException("No such route");
+            }
+
             if(string.IsNullOrWhiteSpace(route) || townMap.Towns == null)
             {
                 throw new ArgumentException("No such route");
@@ -47,8 +52,8 @@ namespace ThoughtWorksTrains.Services
             }
 
             throw new ArgumentException("No such route");
-        }
-        
+        }               
+
         public int GetNumberOfRoutesBetweenTownsByStop(string startTownId, string destinationTownId, TownMap townMap, int stopCount, LimitType limitType)
         {            
             if(string.IsNullOrWhiteSpace(startTownId) || string.IsNullOrWhiteSpace(destinationTownId) || townMap.Towns == null || stopCount <= 0)
@@ -99,7 +104,7 @@ namespace ThoughtWorksTrains.Services
             }
 
             return routeCount;
-        }
+        }        
 
         public int GetNumberOfRoutesBetweenTownsByDistance(string startTownId, string destinationTownId, TownMap townMap, double distance, LimitType limitType)
         {
@@ -113,8 +118,7 @@ namespace ThoughtWorksTrains.Services
             // create 2 lists, 1 to loop over and 1 to edit while in the loop
             var currentRoutes = new List<string> { startTownId };
             var potentialRoutes = new List<string> { startTownId };
-
-            // might need a max loop count
+            
             while (true)
             {                                
                 foreach (var route in currentRoutes)
@@ -185,8 +189,7 @@ namespace ThoughtWorksTrains.Services
             var currentRoutes = new Dictionary<string, double> { { startTownId, 0 } };
             var potentialRoutes = new Dictionary<string, double> { { startTownId, 0 } };
             var destinationRoutes = new Dictionary<string, double>();
-
-            // might need a max loop count
+            
             while(true)
             {
                 foreach(var route in currentRoutes)

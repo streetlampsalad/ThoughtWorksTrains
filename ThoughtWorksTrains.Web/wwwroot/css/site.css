@@ -4,12 +4,16 @@
   font-size: 14px; }
   .trains-title {
     margin-bottom: 50px; }
+  .trains-subtitle {
+    margin-bottom: 30px; }
+  .trains-form {
+    margin-bottom: 30px; }
+    .trains-form-group {
+      margin-bottom: 20px; }
+    .trains-form-control {
+      margin-bottom: 10px; }
   .trains-tab-pane {
     padding-top: 40px; }
-    .trains-tab-pane-form {
-      margin-bottom: 30px; }
-      .trains-tab-pane-form-group {
-        margin-bottom: 20px; }
   .trains-response {
     font-weight: bold; }
 

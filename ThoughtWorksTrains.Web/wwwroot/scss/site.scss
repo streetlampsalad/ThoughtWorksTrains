@@ -7,16 +7,24 @@
         margin-bottom: 50px;
     }
 
-    &-tab-pane {
-        padding-top: 40px;        
+    &-subtitle {
+        margin-bottom: 30px;
+    }
 
-        &-form {
-            margin-bottom: 30px;
+    &-form {
+        margin-bottom: 30px;
 
-            &-group {
-                margin-bottom: 20px;
-            }
+        &-group {
+            margin-bottom: 20px;
         }
+
+        &-control {
+            margin-bottom: 10px;
+        }
+    }
+
+    &-tab-pane {
+        padding-top: 40px;
     }
 
     &-response {

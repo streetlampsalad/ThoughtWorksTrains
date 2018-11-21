@@ -84,7 +84,7 @@ namespace ThoughtWorksTrains.Services
                         {
                             routeCount++;
                         }
-                        else if(limitType == LimitType.LessThen && stopCount < i)
+                        else if(limitType == LimitType.LessThen && i < stopCount)
                         {
                             routeCount++;
                         }

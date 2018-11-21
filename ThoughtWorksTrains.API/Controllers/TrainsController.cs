@@ -19,14 +19,23 @@ namespace ThoughtWorksTrains.API.Controllers
         {
             _townService = townService;
             _routeService = routeService;
-        }        
-        
-        [HttpPost]        
+        }
+
+        /// <summary>
+        /// Retrieves distance from a given route
+        /// </summary>
+        /// <response code="200">Route distance calculated</response>
+        /// <response code="400">Route has missing/invalid values</response>
+        /// <response code="500">Oops! Can't calculate the route distance right now</response>
+        [HttpPost]
+        [ProducesResponseType(typeof(GetRouteDistanceResponse), 200)]
+        [ProducesResponseType(typeof(GetRouteDistanceResponse), 400)]
+        [ProducesResponseType(500)]
         public IActionResult GetRouteDistance([FromBody] GetRouteDistanceResponse response)
         {
             if(string.IsNullOrWhiteSpace(response.route) || response.routes == null || !response.routes.Any())
             {
-                return BadRequest("Invalid or missing arguments");
+                return BadRequest("Route has missing/invalid values");
             }
 
             try
@@ -42,7 +51,16 @@ namespace ThoughtWorksTrains.API.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Retrieves number of routes between towns by stops
+        /// </summary>
+        /// <response code="200">Routes counted</response>
+        /// <response code="400">Town has missing/invalid values</response>
+        /// <response code="500">Oops! Can't calculate the number of routes right now</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetNumberOfRoutesBetweenTownsByStopResponse), 200)]
+        [ProducesResponseType(typeof(GetNumberOfRoutesBetweenTownsByStopResponse), 400)]
+        [ProducesResponseType(500)]
         public IActionResult GetNumberOfRoutesBetweenTownsByStop([FromBody] GetNumberOfRoutesBetweenTownsByStopResponse response)
         {
             if(string.IsNullOrWhiteSpace(response.startTownId) 
@@ -67,7 +85,16 @@ namespace ThoughtWorksTrains.API.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Retrieves number of routes between towns by distance
+        /// </summary>
+        /// <response code="200">Routes counted</response>
+        /// <response code="400">Town has missing/invalid values</response>
+        /// <response code="500">Oops! Can't calculate the number of routes right now</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetNumberOfRoutesBetweenTownsByDistanceResponse), 200)]
+        [ProducesResponseType(typeof(GetNumberOfRoutesBetweenTownsByDistanceResponse), 400)]
+        [ProducesResponseType(500)]
         public IActionResult GetNumberOfRoutesBetweenTownsByDistance([FromBody] GetNumberOfRoutesBetweenTownsByDistanceResponse response)
         {
             if(string.IsNullOrWhiteSpace(response.startTownId)
@@ -92,7 +119,16 @@ namespace ThoughtWorksTrains.API.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Retrieves shortest route between 2 towns
+        /// </summary>
+        /// <response code="200">Distance calculated</response>
+        /// <response code="400">Town has missing/invalid values</response>
+        /// <response code="500">Oops! Can't calculate the distance right now</response>
         [HttpPost]
+        [ProducesResponseType(typeof(GetShortestDistanceBetweenTownsByIdResponse), 200)]
+        [ProducesResponseType(typeof(GetShortestDistanceBetweenTownsByIdResponse), 400)]
+        [ProducesResponseType(500)]
         public IActionResult GetShortestDistanceBetweenTownsById([FromBody] GetShortestDistanceBetweenTownsByIdResponse response)
         {
             if(string.IsNullOrWhiteSpace(response.startTownId)

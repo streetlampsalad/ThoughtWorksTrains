@@ -33,7 +33,12 @@ namespace ThoughtWorksTrains.API.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetRouteDistance([FromBody] GetRouteDistanceResponse response)
         {
-            if(string.IsNullOrWhiteSpace(response.route) || response.routes == null || !response.routes.Any())
+            if(response == null)
+            {
+                return BadRequest("Route has missing/invalid values");
+            }
+
+            if(string.IsNullOrWhiteSpace(response.route) || response.routes == null)
             {
                 return BadRequest("Route has missing/invalid values");
             }
@@ -63,11 +68,15 @@ namespace ThoughtWorksTrains.API.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetNumberOfRoutesBetweenTownsByStop([FromBody] GetNumberOfRoutesBetweenTownsByStopResponse response)
         {
+            if(response == null)
+            {
+                return BadRequest("Route has missing/invalid values");
+            }
+
             if(string.IsNullOrWhiteSpace(response.startTownId) 
             || string.IsNullOrWhiteSpace(response.destinationTownId) 
             || response.stopCount < 0              
-            || response.routes == null 
-            || !response.routes.Any())
+            || response.routes == null)
             {
                 return BadRequest("Invalid or missing arguments");
             }
@@ -97,11 +106,15 @@ namespace ThoughtWorksTrains.API.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetNumberOfRoutesBetweenTownsByDistance([FromBody] GetNumberOfRoutesBetweenTownsByDistanceResponse response)
         {
+            if(response == null)
+            {
+                return BadRequest("Route has missing/invalid values");
+            }
+
             if(string.IsNullOrWhiteSpace(response.startTownId)
             || string.IsNullOrWhiteSpace(response.destinationTownId)
             || response.distance < 0
-            || response.routes == null
-            || !response.routes.Any())
+            || response.routes == null)
             {
                 return BadRequest("Invalid or missing arguments");
             }
@@ -131,10 +144,14 @@ namespace ThoughtWorksTrains.API.Controllers
         [ProducesResponseType(500)]
         public IActionResult GetShortestDistanceBetweenTownsById([FromBody] GetShortestDistanceBetweenTownsByIdResponse response)
         {
+            if(response == null)
+            {
+                return BadRequest("Route has missing/invalid values");
+            }
+
             if(string.IsNullOrWhiteSpace(response.startTownId)
             || string.IsNullOrWhiteSpace(response.destinationTownId)            
-            || response.routes == null
-            || !response.routes.Any())
+            || response.routes == null)
             {
                 return BadRequest("Invalid or missing arguments");
             }

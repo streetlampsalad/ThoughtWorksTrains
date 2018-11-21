@@ -30,8 +30,7 @@ namespace ThoughtWorksTrains.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -51,7 +50,7 @@ namespace ThoughtWorksTrains.Web
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+                        
             app.UseMvc();
         }
     }

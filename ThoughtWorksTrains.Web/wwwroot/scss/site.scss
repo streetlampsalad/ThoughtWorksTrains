@@ -1,0 +1,29 @@
+﻿.trains {
+    padding: 50px;
+    margin: auto;
+    font-size: 14px;
+
+    &-title {
+        margin-bottom: 50px;
+    }
+
+    &-tab-pane {
+        padding-top: 40px;        
+
+        &-form {
+            margin-bottom: 30px;
+
+            &-group {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    &-response {
+        font-weight: bold;
+    }
+}
+
+.error {
+    color: red;
+}

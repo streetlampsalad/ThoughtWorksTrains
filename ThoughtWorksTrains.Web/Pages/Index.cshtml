@@ -4,10 +4,42 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>ThoughtWorks Trains</h1>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="trains">
+            <h1 class="trains-title">ThoughtWorks Trains</h1>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#get-route-distance-tab" aria-controls="get-route-distance" role="tab" data-toggle="tab">Get Route Distance</a></li>
+                <li role="presentation"><a href="#get-shortest-distance-between-towns-by-id-tab" aria-controls="get-shortest-distance-between-towns-by-id" role="tab" data-toggle="tab">Shortest Distance Between Towns</a></li>
+                <li role="presentation"><a href="#get-number-of-routes-between-towns-by-stop-tab" aria-controls="get-number-of-routes-between-towns-by-stop" role="tab" data-toggle="tab">Routes By Stop</a></li>
+                <li role="presentation"><a href="#get-number-0f-routes-between-towns-by-distance-tab" aria-controls="get-number-0f-routes-between-towns-by-distance" role="tab" data-toggle="tab">Routes By Distance</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane trains-tab-pane active" id="get-route-distance-tab">                    
+                    <form class="trains-tab-pane-form" id="get-route-distance-form">
+                        <div class="trains-tab-pane-form-group form-group">
+                            <label for="get-route-distance-route">Route</label>
+                            <input type="text" class="form-control" id="get-route-distance-route" placeholder="Route (e.g. A-B-C)">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <div class="trains-response get-route-distance-response"></div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="get-number-0f-routes-between-towns-by-distance-tab">
+                    <h4>Get Number Of Routes Between Towns By Distance</h4>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="get-number-of-routes-between-towns-by-stop-tab">
+                    <h4>Get Number Of Routes Between Towns By Stop</h4>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="get-shortest-distance-between-towns-by-id-tab">
+                    <h4>Get Shortest Distance Between Towns By Id</h4>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+

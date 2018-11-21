@@ -41,8 +41,7 @@ namespace ThoughtWorksTrains.Tests
         [Test]
         public void GetRouteDistance_CalculateRouteA()
         {
-            var result = _routeService.GetRouteDistance("A", _testTowns);            
-            Assert.AreEqual(0, result);
+            Assert.Throws<ArgumentException>(() => _routeService.GetRouteDistance("A", new TownMap()), "No such route");
         }
 
         [Test]

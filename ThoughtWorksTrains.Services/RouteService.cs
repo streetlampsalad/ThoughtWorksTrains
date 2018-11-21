@@ -17,7 +17,7 @@ namespace ThoughtWorksTrains.Services
             }
 
             var stops = route.Split('-');
-            if(!stops.Any())
+            if(stops.Count() <= 1)
             {
                 throw new ArgumentException("No such route");
             }

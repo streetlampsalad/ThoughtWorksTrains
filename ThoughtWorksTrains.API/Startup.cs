@@ -45,6 +45,7 @@ namespace ThoughtWorksTrains.API
             if(env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             }
             else
             {
@@ -61,8 +62,7 @@ namespace ThoughtWorksTrains.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "ThoughtWorksTrains API V1");
             });
 
-            app.UseHttpsRedirection();
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseHttpsRedirection();                        
             app.UseMvc();
         }
     }

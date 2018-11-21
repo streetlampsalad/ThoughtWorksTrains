@@ -18,4 +18,5 @@
     font-weight: bold; }
 
 .error {
-  color: red; }
+  color: red;
+  text-transform: uppercase; }
